@@ -4,9 +4,10 @@ from sqlalchemy import (
     Integer,
     String
 )
+from database import Base
 
 
-class QuestionModel():
+class QuestionModel(Base):
     __tablename__ = "question"
 
     id = Column(Integer, index=True)
