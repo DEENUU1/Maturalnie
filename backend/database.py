@@ -32,3 +32,18 @@ def create_question(db: Session, question: schemas.QuestionBase):
     db.commit()
     db.refresh(db_question)
     return db_question
+
+
+# Function to get a random id of a object based on local time
+def get_random_id():
+
+
+# Function to return a random object
+def get_question():
+    pass
+
+
+# guess the answer
+# post check if user posted a correct answer
+def guess_answer():
+    pass
