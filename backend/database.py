@@ -3,6 +3,8 @@ from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker, Session
 import models, schemas
 from models import Base
+from random_object import return_random_id
+
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 engine = create_engine(
@@ -40,17 +42,9 @@ def get_question_count() -> int:
     question_count = db.query(models.QuestionModel).count()
     return question_count
 
-# Function to get a random id of a object based on local time
-def get_random_id():
-    pass
+
+def get_random_question(db: Session):
+    question_id = return_random_id()
+    return db.query(models.QuestionModel).filter(models.QuestionModel.id == question_id).first()
 
 
-# Function to return a random object
-def get_question():
-    pass
-
-
-# guess the answer
-# post check if user posted a correct answer
-def guess_answer():
-    pass

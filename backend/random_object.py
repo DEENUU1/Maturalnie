@@ -8,10 +8,9 @@ def get_current_date_hash():
     return hashlib.sha256(current_date.encode('utf-8')).digest()
 
 
-def return_random_question() -> int:
+def return_random_id() -> int:
     date_hash = get_current_date_hash()
     count = get_question_count()
     return int.from_bytes(date_hash, byteorder="big") % (count + 1)
 
 
-print(return_random_question())
