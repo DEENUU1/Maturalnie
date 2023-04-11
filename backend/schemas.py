@@ -6,7 +6,12 @@ class QuestionBase(BaseModel):
     answer: str
 
 
-class Question(QuestionBase):
+class QuestionContent(QuestionBase):
+    class Config:
+        orm_mode = True
+
+
+class QuestionInfo(QuestionBase):
     id: int
     is_active: bool
 

@@ -1,24 +1,30 @@
 from fastapi import FastAPI, Depends, HTTPException
-import database, models, schemas
+import database, schemas
 from sqlalchemy.orm import Session
-
+from typing import List
 
 app = FastAPI()
 
 
-@app.post("/create/questions/", response_model=schemas.Question)
-def create_question(question: schemas.QuestionBase, db: Session = Depends(database.get_db)):
+@app.post("/create/questions/", response_model=schemas.QuestionContent)
+def create_question(question: schemas.QuestionContent, db: Session = Depends(database.get_db)):
     db_question = database.create_question(db=db, question=question)
-    return db_question
+    if db_question:
+        return db_question
+    raise HTTPException(400, "Something went wrong")
 
 
-@app.get("/questions")
-def get_question_list(db: Session = Depends(database.get_db)):
-    db_question = database.get_questions(db=db)
-    return db_question
+@app.get("/questions/", response_model=List[schemas.QuestionInfo])
+def get_question_list(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+    db_question = database.get_questions(db=db, skip=skip, limit=limit)
+    if db_question:
+        return db_question
+    raise HTTPException(404, "There is no questions")
 
 
-@app.get('/question/')
+@app.get('/question/', response_model=schemas.QuestionContent)
 def get_random_question(db: Session = Depends(database.get_db)):
     db_question = database.get_random_question(db=db)
-    return db_question
+    if db_question:
+        return db_question
+    raise HTTPException(404, "This question does not exist")
