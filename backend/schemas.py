@@ -12,8 +12,3 @@ class Question(QuestionBase):
 
     class Config:
         orm_mode = True
-
-
-class QuestionCount(QuestionBase):
-    id: int
-

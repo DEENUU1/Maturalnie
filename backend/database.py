@@ -14,11 +14,8 @@ Base.metadata.create_all(bind=engine)
 
 
 def get_db() -> Session:
-    db = SessionLocal()
-    try:
+    with SessionLocal() as db:
         yield db
-    finally:
-        db.close()
 
 
 def get_questions(db: Session, skip: int = 0, limit: int = 100):

@@ -1,9 +1,4 @@
 from fastapi import FastAPI, Depends, HTTPException
-from database import (
-    get_questions,
-    create_question,
-    get_random_question,
-)
 import database, models, schemas
 from sqlalchemy.orm import Session
 
