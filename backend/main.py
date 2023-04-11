@@ -17,3 +17,7 @@ def create_question(question: schemas.QuestionBase, db: Session = Depends(databa
     return db_question
 
 
+@app.get('/question/')
+def get_random_question(db: Session = Depends(database.get_db)):
+    db_question = database.get_random_question(db=db)
+    return db_question
