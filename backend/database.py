@@ -1,5 +1,4 @@
-from fastapi import Depends
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 import models, schemas
 from models import Base
@@ -15,11 +14,8 @@ Base.metadata.create_all(bind=engine)
 
 
 def get_db() -> Session:
-    db = SessionLocal()
-    try:
+    with SessionLocal() as db:
         yield db
-    finally:
-        db.close()
 
 
 def get_questions(db: Session, skip: int = 0, limit: int = 100):
