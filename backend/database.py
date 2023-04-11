@@ -1,7 +1,10 @@
-from sqlalchemy import create_engine
+from fastapi import Depends
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker, Session
 import models, schemas
 from models import Base
+from random_object import return_random_id
+
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 engine = create_engine(
@@ -11,7 +14,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 
 
-def get_db():
+def get_db() -> Session:
     db = SessionLocal()
     try:
         yield db
@@ -32,3 +35,16 @@ def create_question(db: Session, question: schemas.QuestionBase):
     db.commit()
     db.refresh(db_question)
     return db_question
+
+
+def get_question_count() -> int:
+    db = SessionLocal()
+    question_count = db.query(models.QuestionModel).count()
+    return question_count
+
+
+def get_random_question(db: Session):
+    question_id = return_random_id()
+    return db.query(models.QuestionModel).filter(models.QuestionModel.id == question_id).first()
+
+
