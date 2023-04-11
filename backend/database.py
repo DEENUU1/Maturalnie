@@ -1,4 +1,5 @@
-from sqlalchemy import create_engine
+from fastapi import Depends
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker, Session
 import models, schemas
 from models import Base
@@ -11,7 +12,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 
 
-def get_db():
+def get_db() -> Session:
     db = SessionLocal()
     try:
         yield db
@@ -34,8 +35,14 @@ def create_question(db: Session, question: schemas.QuestionBase):
     return db_question
 
 
+def get_question_count() -> int:
+    db = SessionLocal()
+    question_count = db.query(models.QuestionModel).count()
+    return question_count
+
 # Function to get a random id of a object based on local time
 def get_random_id():
+    pass
 
 
 # Function to return a random object
