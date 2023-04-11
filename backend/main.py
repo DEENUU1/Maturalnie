@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Request, Form
 import database, schemas
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Annotated
 
 app = FastAPI()
 
@@ -28,3 +28,12 @@ def get_random_question(db: Session = Depends(database.get_db)):
     if db_question:
         return db_question
     raise HTTPException(404, "This question does not exist")
+
+
+@app.post('/answer/')
+def post_user_answer(answer: Annotated[str, Form()], db: Session = Depends(database.get_db)):
+    random_question = get_random_question(db)
+    correct_answer = random_question.answer
+    if answer == correct_answer:
+        return {"message": "Correct answer"}
+    return {"message": "Not correct answer"}

@@ -17,3 +17,12 @@ class QuestionInfo(QuestionBase):
 
     class Config:
         orm_mode = True
+
+
+class AnswerBase(BaseModel):
+    answer: str
+
+
+class Answer(AnswerBase):
+    class Config:
+        orm_mode = True
