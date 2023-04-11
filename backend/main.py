@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException, Request, Form
+from fastapi import FastAPI, Depends, HTTPException, Form
 import database, schemas
 from sqlalchemy.orm import Session
 from typing import List, Annotated
@@ -32,8 +32,10 @@ def get_random_question(db: Session = Depends(database.get_db)):
 
 @app.post('/answer/')
 def post_user_answer(answer: Annotated[str, Form()], db: Session = Depends(database.get_db)):
-    random_question = get_random_question(db)
-    correct_answer = random_question.answer
-    if answer == correct_answer:
-        return {"message": "Correct answer"}
-    return {"message": "Not correct answer"}
+    if answer:
+        random_question = get_random_question(db)
+        correct_answer = random_question.answer
+        if answer == correct_answer:
+            return {"message": "Correct answer"}
+        return {"message": "Not correct answer"}
+    raise HTTPException(400, "Invalid data")
