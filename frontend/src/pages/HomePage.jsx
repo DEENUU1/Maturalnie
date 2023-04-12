@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { useQuestionData } from "../hooks/RandomQuestionHook";
 import EquationComponent  from "../components/mathFormularFormater";
 import NavigationBar from "../components/NavigationBar";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
@@ -33,29 +39,55 @@ const QuestionPage = () => {
         <>
         <NavigationBar/>
 
-        <div>
-        <h3>{questionData.description}</h3>
-        <EquationComponent equation={questionData.question} />
-        
-          <form onSubmit={handleSubmit}>
-            <label>Symbols </label>
-            <button onClick={() => handleButtonClick("\sqrt")}><EquationComponent equation="√" /></button>
-            <button onClick={() => handleButtonClick("\\frac{x}{y}")}><EquationComponent equation="\frac{x}{y}"/></button>
-            <button onClick={() => handleButtonClick("+")}><EquationComponent equation="+" /></button>
-            <button onClick={() => handleButtonClick("-")}><EquationComponent equation="-" /></button>
-            <button onClick={() => handleButtonClick("/")}><EquationComponent equation="/" /></button>
-            <button onClick={() => handleButtonClick("*")}><EquationComponent equation="*" /></button>
-            <button onClick={() => handleButtonClick("^2")}><EquationComponent equation="^2" /></button>
-            <button onClick={() => handleButtonClick("^3")}><EquationComponent equation="^3" /></button>
+        <Container>
+          
+          <Card className="mb-5 mt-5 text-center" border="dark" >
+            <Card.Header>{questionData.description}</Card.Header>
+            <Card.Body><EquationComponent equation={questionData.question} /></Card.Body>
+          </Card>
 
-            <br></br>
-            <br></br>
-            <label>Answer:</label>
-            <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
-            <button type="submit">Submit</button>
+          <Form className="mb-5" onSubmit={handleSubmit}>
+            <Form.Label>Answer:</Form.Label>
+            <Form.Control type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
+            <Button type="submit">Submit</Button>
             {response && <p>{response}</p>}
-          </form>
-        </div>
+          </Form>
+          
+          <div className="mb-5 text-center"> 
+            <Row>
+              <Col>  
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("\sqrt")}><EquationComponent equation="√" /></Button >
+              </Col>
+              <Col>
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("\\frac{x}{y}")}><EquationComponent equation="\frac{x}{y}"/></Button > 
+              </Col>
+              <Col>         
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("+")}><EquationComponent equation="+" /></Button >
+              </Col>
+              <Col>
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("-")}><EquationComponent equation="-" /></Button >
+              </Col>
+            </Row>
+            </div>
+
+            <div className="mb-5 text-center">
+            <Row>
+              <Col>
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("/")}><EquationComponent equation="/" /></Button >
+              </Col>
+              <Col>
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("*")}><EquationComponent equation="*" /></Button >
+              </Col>
+              <Col>
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("^2")}><EquationComponent equation="^2" /></Button >
+              </Col>
+              <Col>
+                <Button style={{ width: "60px", height: "75px" }} variant="outline-dark" onClick={() => handleButtonClick("^3")}><EquationComponent equation="^3" /></Button >
+              </Col>
+            </Row>
+            </div>
+
+        </Container>
         </>
     )   
 }
