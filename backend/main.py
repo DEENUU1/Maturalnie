@@ -27,9 +27,17 @@ def create_question(question: schemas.QuestionContent, db: Session = Depends(dat
         return db_question
     raise HTTPException(400, "Something went wrong")
 
-@app.delete("/questions/", response_model=schemas.QuestionDelete)
+@app.delete("/questions/{id}", response_model=schemas.QuestionDelete)
 def delete_question(question: schemas.QuestionDelete, db: Session = Depends(database.get_db)):
     db_question = database.delete_question(db=db, question=question)
+    if db_question:
+        return db_question
+    raise HTTPException(404, "This question does not exist")
+
+
+@app.put('/questions/{id}', response_model=schemas.QuestionInfo)
+def update_question(question: schemas.QuestionInfo, db: Session = Depends(database.get_db)):
+    db_question = database.update_question(db=db, question=question)
     if db_question:
         return db_question
     raise HTTPException(404, "This question does not exist")
@@ -59,3 +67,5 @@ def post_user_answer(answer: Annotated[str, Form()], db: Session = Depends(datab
             return {"message": "Correct answer"}
         return {"message": "Not correct answer"}
     raise HTTPException(400, "Invalid data")
+
+
