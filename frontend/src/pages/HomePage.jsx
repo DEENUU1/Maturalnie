@@ -8,6 +8,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import InputGroup from "react-bootstrap/InputGroup";
+import { BsFillSendCheckFill } from "react-icons/bs";
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
@@ -46,8 +48,10 @@ const QuestionPage = () => {
 
           <Form className="mb-5" onSubmit={handleSubmit}>
             <Form.Label>Answer:</Form.Label>
-            <Form.Control type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
-            <Button type="submit">Submit</Button>
+            <InputGroup>
+              <Form.Control style={{textAlign: "center"}} type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
+              <Button variant="dark" type="submit"><BsFillSendCheckFill/></Button>
+            </InputGroup>
             {response && <p>{response}</p>}
           </Form>
           
