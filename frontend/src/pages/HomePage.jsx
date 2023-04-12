@@ -40,7 +40,8 @@ const QuestionPage = () => {
     return (
         <>
         <NavigationBar/>
-        <Container className="w-60 p-3" style={{ maxWidth: "500px"}}>
+       
+        <Container className="w-60 px-3 mx-auto border border-dark" style={{ maxWidth: "500px", backgroundColor: "white", marginTop: "75px"}}>
           <Card className="mb-5 mt-5 text-center" border="dark" >
             <Card.Header>{questionData.description}</Card.Header>
             <Card.Body><EquationComponent equation={questionData.question} /></Card.Body>
@@ -88,7 +89,6 @@ const QuestionPage = () => {
               </Col>
             </Row>
             </div>
-
         </Container>
         </>
     )   

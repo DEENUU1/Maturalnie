@@ -20,14 +20,14 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.post("/create/question/", response_model=schemas.QuestionContent)
+@app.post("/questions/", response_model=schemas.QuestionContent)
 def create_question(question: schemas.QuestionContent, db: Session = Depends(database.get_db)):
     db_question = database.create_question(db=db, question=question)
     if db_question:
         return db_question
     raise HTTPException(400, "Something went wrong")
 
-@app.delete("/delete/question/", response_model=schemas.QuestionDelete)
+@app.delete("/questions/", response_model=schemas.QuestionDelete)
 def delete_question(question: schemas.QuestionDelete, db: Session = Depends(database.get_db)):
     db_question = database.delete_question(db=db, question=question)
     if db_question:
