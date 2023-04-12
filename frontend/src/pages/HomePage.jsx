@@ -38,9 +38,7 @@ const QuestionPage = () => {
     return (
         <>
         <NavigationBar/>
-
-        <Container>
-          
+        <Container className="w-60 p-3" style={{ maxWidth: "500px"}}>
           <Card className="mb-5 mt-5 text-center" border="dark" >
             <Card.Header>{questionData.description}</Card.Header>
             <Card.Body><EquationComponent equation={questionData.question} /></Card.Body>
