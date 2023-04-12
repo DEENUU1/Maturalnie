@@ -35,12 +35,14 @@ const QuestionPage = () => {
         
     <form onSubmit={handleSubmit}>
       <label>Symbols </label>
-      <button onClick={() => handleButtonClick("√")}><EquationComponent equation="√" /></button>
+      <button onClick={() => handleButtonClick("\sqrt")}><EquationComponent equation="√" /></button>
       <button onClick={() => handleButtonClick("\\frac{x}{y}")}><EquationComponent equation="\frac{x}{y}" /></button>
       <button onClick={() => handleButtonClick("+")}><EquationComponent equation="+" /></button>
       <button onClick={() => handleButtonClick("-")}><EquationComponent equation="-" /></button>
       <button onClick={() => handleButtonClick("/")}><EquationComponent equation="/" /></button>
       <button onClick={() => handleButtonClick("*")}><EquationComponent equation="*" /></button>
+      <button onClick={() => handleButtonClick("^2")}><EquationComponent equation="^2" /></button>
+      <button onClick={() => handleButtonClick("^3")}><EquationComponent equation="^3" /></button>
 
       <br></br>
       <br></br>
