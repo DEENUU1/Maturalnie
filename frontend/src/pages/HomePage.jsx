@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuestionData } from "../hooks/RandomQuestionHook";
 import { usePostAnswer } from "../hooks/UsersAnswerHook";
-
+import EquationComponent  from "../components/mathFormularFormater";
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
@@ -32,8 +32,10 @@ const QuestionPage = () => {
       };
 
     return (
+      // "m/(m-√5)=(5+√5)/5"
         <div>
-        <h2>{questionData.question}</h2>
+        <h2>Complete this task. The answer is integer number.</h2>
+        <EquationComponent equation={questionData.question} />
     <form onSubmit={handleSubmit}>
       <label>
         Answer:

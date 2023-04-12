@@ -11,6 +11,5 @@ def get_current_date_hash():
 def return_random_id() -> int:
     date_hash = get_current_date_hash()
     count = database.get_question_count()
-    return int.from_bytes(date_hash, byteorder="big") % (count + 1)
-
+    return int.from_bytes(date_hash, byteorder="big") % (count)
 

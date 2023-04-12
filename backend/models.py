@@ -2,7 +2,8 @@ from sqlalchemy import (
     Boolean,
     Column,
     Integer,
-    String
+    String,
+    Unicode
 )
 from sqlalchemy.ext.declarative import declarative_base
 
