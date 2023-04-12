@@ -31,6 +31,10 @@ const QuestionPage = () => {
         }
       };
     
+    const handleButtonClick = (value) => {
+      setAnswer(answer + value);
+    };
+
     return (
         <div>
         <h2>Complete this task.</h2>
@@ -38,12 +42,12 @@ const QuestionPage = () => {
         
     <form onSubmit={handleSubmit}>
       <label>Symbols </label>
-      <button value="√"><EquationComponent equation="√" /></button>
-      <button value="\frac{x}{y}"><EquationComponent equation="\frac{x}{y}" /></button>
-      <button value="+"><EquationComponent equation="+" /></button>
-      <button value="-"><EquationComponent equation="-" /></button>
-      <button value="/"><EquationComponent equation="/" /></button>
-      <button value="*"><EquationComponent equation="*" /></button>
+      <button onClick={() => handleButtonClick("√")}><EquationComponent equation="√" /></button>
+      <button onClick={() => handleButtonClick("\\frac{x}{y}")}><EquationComponent equation="\frac{x}{y}" /></button>
+      <button onClick={() => handleButtonClick("+")}><EquationComponent equation="+" /></button>
+      <button onClick={() => handleButtonClick("-")}><EquationComponent equation="-" /></button>
+      <button onClick={() => handleButtonClick("/")}><EquationComponent equation="/" /></button>
+      <button onClick={() => handleButtonClick("*")}><EquationComponent equation="*" /></button>
 
       <br></br>
       <br></br>
