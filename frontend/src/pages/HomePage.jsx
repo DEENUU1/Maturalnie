@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { useQuestionData } from "../hooks/RandomQuestionHook";
-import { usePostAnswer } from "../hooks/UsersAnswerHook";
 import EquationComponent  from "../components/mathFormularFormater";
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
     const [answer, setAnswer] = useState('');
     const [response, setResponse] = useState(null);
-    // const [answer, setAnswer] = useState("");
-    // const [error, response, postAnswer] = usePostAnswer();
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     postAnswer(answer);
-    // };
     const handleSubmit = async (event) => {
         event.preventDefault();
     
@@ -37,7 +30,7 @@ const QuestionPage = () => {
 
     return (
         <div>
-        <h2>Complete this task.</h2>
+        <h3>{questionData.description}</h3>
         <EquationComponent equation={questionData.question} />
         
     <form onSubmit={handleSubmit}>

@@ -25,6 +25,7 @@ def get_questions(db: Session, skip: int = 0, limit: int = 100):
 def create_question(db: Session, question: schemas.QuestionBase):
     db_question = models.QuestionModel(
         question=question.question,
+        description=question.description,
         answer=question.answer
     )
     db.add(db_question)
