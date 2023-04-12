@@ -30,17 +30,25 @@ const QuestionPage = () => {
           console.error(error);
         }
       };
-
+    
     return (
-      // "m/(m-√5)=(5+√5)/5"
         <div>
-        <h2>Complete this task. The answer is integer number.</h2>
+        <h2>Complete this task.</h2>
         <EquationComponent equation={questionData.question} />
+        
     <form onSubmit={handleSubmit}>
-      <label>
-        Answer:
-        <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
-      </label>
+      <label>Symbols </label>
+      <button value="√"><EquationComponent equation="√" /></button>
+      <button value="\frac{x}{y}"><EquationComponent equation="\frac{x}{y}" /></button>
+      <button value="+"><EquationComponent equation="+" /></button>
+      <button value="-"><EquationComponent equation="-" /></button>
+      <button value="/"><EquationComponent equation="/" /></button>
+      <button value="*"><EquationComponent equation="*" /></button>
+
+      <br></br>
+      <br></br>
+      <label>Answer:</label>
+      <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} />
       <button type="submit">Submit</button>
       {response && <p>{response}</p>}
     </form>
