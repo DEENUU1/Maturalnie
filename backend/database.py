@@ -33,6 +33,15 @@ def create_question(db: Session, question: schemas.QuestionBase):
     return db_question
 
 
+def delete_question(db: Session, question: schemas.QuestionDelete):
+    db_question = db.query(models.QuestionModel).filter(models.QuestionModel.id == question.id).first()
+    if not db_question:
+        return None
+    db.delete(db_question)
+    db.commit()
+    return db_question
+
+
 def get_question_count() -> int:
     db = SessionLocal()
     question_count = db.query(models.QuestionModel).count()
