@@ -16,5 +16,6 @@ class QuestionModel(Base):
 
     id = Column(Integer, index=True, primary_key=True)
     question = Column(String)
+    description = Column(String) 
     answer = Column(String)
     is_active = Column(Boolean, default=True)
