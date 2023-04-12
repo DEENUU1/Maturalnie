@@ -11,6 +11,12 @@ class QuestionContent(QuestionBase):
         orm_mode = True
 
 
+class QuestionDelete(BaseModel):
+    id: int
+    class Config:
+        orm_mode = True
+
+
 class QuestionInfo(QuestionBase):
     id: int
     is_active: bool
