@@ -1,10 +1,9 @@
 from sqlalchemy import (
-    Boolean,
     Column,
     Integer,
-    String
+    String,
 )
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 
 
 Base = declarative_base()
@@ -15,5 +14,5 @@ class QuestionModel(Base):
 
     id = Column(Integer, index=True, primary_key=True)
     question = Column(String)
+    description = Column(String) 
     answer = Column(String)
-    is_active = Column(Boolean, default=True)
