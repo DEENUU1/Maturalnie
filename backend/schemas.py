@@ -20,7 +20,6 @@ class QuestionDelete(BaseModel):
 
 class QuestionInfo(QuestionBase):
     id: int
-    is_active: bool
 
     class Config:
         orm_mode = True
