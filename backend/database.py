@@ -1,16 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
-import models, schemas
-from models import Base
-from random_object import return_random_id
-from typing import List
+
+from backend import models, schemas
+from backend.random_object import return_random_id
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=engine)
 
 
 def get_db() -> Session:
@@ -21,7 +20,7 @@ def get_db() -> Session:
         yield db
 
 
-def get_questions(db: Session, skip: int = 0, limit: int = 100) -> List[models.QuestionModel]:
+def get_questions(db: Session, skip: int = 0, limit: int = 100):
     """ 
     Returns a list of questions from the database, with an optional limit and offset.
     """
@@ -43,7 +42,7 @@ def create_question(db: Session, question: schemas.QuestionBase) -> models.Quest
     return db_question
 
 
-def delete_question(db: Session, question: schemas.QuestionDelete) -> models.QuestionModel:
+def delete_question(db: Session, question: schemas.QuestionDelete):
     """ 
     Deletes a question from the database.
     """
@@ -53,7 +52,7 @@ def delete_question(db: Session, question: schemas.QuestionDelete) -> models.Que
     return db_question
 
 
-def update_question(db: Session, question: schemas.QuestionContent) -> models.QuestionModel:
+def update_question(db: Session, question: schemas.QuestionContent):
     """ 
     Updates an existing question in the database.
     """
@@ -75,7 +74,7 @@ def get_question_count() -> int:
     return question_count
 
 
-def get_random_question(db: Session) -> models.QuestionModel:
+def get_random_question(db: Session):
     """ 
     Returns a random question from the database.
     """

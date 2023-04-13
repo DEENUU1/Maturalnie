@@ -1,10 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException, Form, Response, Header
-import database, schemas
 from sqlalchemy.orm import Session
 from typing import List, Annotated
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import auth
+from backend import schemas, database, auth
 
 app = FastAPI()
 
@@ -45,6 +44,7 @@ def create_question(
         return db_question
     raise HTTPException(400, "Something went wrong")
 
+
 @app.delete("/questions/{id}", response_model=schemas.QuestionDelete)
 def delete_question(
         question: schemas.QuestionDelete, 
@@ -69,9 +69,9 @@ def delete_question(
     raise HTTPException(404, "This question does not exist")
 
 
-@app.put('/questions/{id}', response_model=schemas.QuestionInfo)
+@app.put('/questions/{id}', response_model=schemas.QuestionContent)
 def update_question(
-        question: schemas.QuestionInfo, 
+        question: schemas.QuestionContent,
         db: Session = Depends(database.get_db), 
         token: str = Depends(auth.verify_token)
     ):
@@ -79,7 +79,7 @@ def update_question(
     Update a question.
 
     Args:
-        question (schemas.QuestionInfo): The details of the question to update.
+        question (schemas.QuestionContent): The details of the question to update.
         db (Session, optional): The database session. Defaults to Depends(database.get_db).
         token (str, optional): The JWT token. Defaults to Depends(auth.verify_token).
 
@@ -91,6 +91,7 @@ def update_question(
     if db_question:
         return db_question
     raise HTTPException(404, "This question does not exist")
+
 
 @app.get("/questions/", response_model=List[schemas.QuestionInfo], response_model_exclude_unset=True)
 def get_question_list(
