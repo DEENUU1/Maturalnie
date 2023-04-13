@@ -23,14 +23,18 @@ app.add_middleware(
 
 
 @app.post("/questions/", response_model=schemas.QuestionContent)
-def create_question(question: schemas.QuestionContent, db: Session = Depends(database.get_db), token: str = Depends(auth.verify_token)):
+def create_question(question: schemas.QuestionContent,
+                    db: Session = Depends(database.get_db),
+                    token: str = Depends(auth.verify_token)):
     db_question = database.create_question(db=db, question=question)
     if db_question:
         return db_question
     raise HTTPException(400, "Something went wrong")
 
 @app.delete("/questions/{id}", response_model=schemas.QuestionDelete)
-def delete_question(question: schemas.QuestionDelete, db: Session = Depends(database.get_db), token: str = Depends(auth.verify_token)):
+def delete_question(question: schemas.QuestionDelete, 
+                    db: Session = Depends(database.get_db), 
+                    token: str = Depends(auth.verify_token)):
     db_question = database.delete_question(db=db, question=question)
     if db_question:
         return db_question
@@ -38,14 +42,19 @@ def delete_question(question: schemas.QuestionDelete, db: Session = Depends(data
 
 
 @app.put('/questions/{id}', response_model=schemas.QuestionInfo)
-def update_question(question: schemas.QuestionInfo, db: Session = Depends(database.get_db), token: str = Depends(auth.verify_token)):
+def update_question(question: schemas.QuestionInfo, 
+                    db: Session = Depends(database.get_db), 
+                    token: str = Depends(auth.verify_token)):
     db_question = database.update_question(db=db, question=question)
     if db_question:
         return db_question
     raise HTTPException(404, "This question does not exist")
 
 @app.get("/questions/", response_model=List[schemas.QuestionInfo], response_model_exclude_unset=True)
-def get_question_list(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db), token: str = Depends(auth.verify_token)):
+def get_question_list(skip: int = 0, 
+                      limit: int = 100, 
+                      db: Session = Depends(database.get_db), 
+                      token: str = Depends(auth.verify_token)):
     db_question = database.get_questions(db=db, skip=skip, limit=limit)
     if db_question:
         return db_question
@@ -53,7 +62,8 @@ def get_question_list(skip: int = 0, limit: int = 100, db: Session = Depends(dat
 
 
 @app.get('/question/', response_model=schemas.QuestionContent)
-def get_random_question(db: Session = Depends(database.get_db), token: str = Depends(auth.verify_token)):
+def get_random_question(db: Session = Depends(database.get_db), 
+                        token: str = Depends(auth.verify_token)):
     db_question = database.get_random_question(db=db)
     if db_question:
         return db_question
@@ -61,7 +71,8 @@ def get_random_question(db: Session = Depends(database.get_db), token: str = Dep
 
 
 @app.post('/answer/')
-def post_user_answer(answer: Annotated[str, Form()], db: Session = Depends(database.get_db)) -> Response:
+def post_user_answer(answer: Annotated[str, Form()], 
+                     db: Session = Depends(database.get_db)) -> Response:
     if answer:
         random_question = get_random_question(db)
         correct_answer = random_question.answer

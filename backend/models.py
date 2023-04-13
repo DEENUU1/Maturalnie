@@ -3,7 +3,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Unicode
 )
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -18,4 +17,3 @@ class QuestionModel(Base):
     question = Column(String)
     description = Column(String) 
     answer = Column(String)
-    is_active = Column(Boolean, default=True)
