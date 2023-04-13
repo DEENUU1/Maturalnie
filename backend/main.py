@@ -66,8 +66,8 @@ def post_user_answer(answer: Annotated[str, Form()], db: Session = Depends(datab
         random_question = get_random_question(db)
         correct_answer = random_question.answer
         if answer == correct_answer:
-            return JSONResponse(content={"message": "Correct answer"})
-        return JSONResponse(content={"message": "Not correct answer"})
+            return JSONResponse(content={"success": "Correct answer"})
+        return JSONResponse(content={"error": "Not correct answer"})
     raise HTTPException(400, "Invalid data")
 
 
