@@ -1,6 +1,7 @@
 import datetime
 import hashlib
-from backend import database
+# from backend import database
+import database
 
 
 def get_current_date_hash() -> bytes:

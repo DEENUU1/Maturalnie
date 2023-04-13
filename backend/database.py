@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 
-from backend import models, schemas
-from backend.random_object import return_random_id
+# from backend import models, schemas
+import models, schemas, random_object
+# from backend.random_object import return_random_id
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 engine = create_engine(
@@ -78,7 +79,7 @@ def get_random_question(db: Session):
     """ 
     Returns a random question from the database.
     """
-    question_id = return_random_id()
+    question_id = random_object.return_random_id()
     return db.query(models.QuestionModel).filter(models.QuestionModel.id == question_id).first()
 
 
