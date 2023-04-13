@@ -36,8 +36,6 @@ def create_question(db: Session, question: schemas.QuestionBase):
 
 def delete_question(db: Session, question: schemas.QuestionDelete):
     db_question = db.query(models.QuestionModel).filter(models.QuestionModel.id == question.id).first()
-    if not db_question:
-        return None
     db.delete(db_question)
     db.commit()
     return db_question
@@ -45,8 +43,6 @@ def delete_question(db: Session, question: schemas.QuestionDelete):
 
 def update_question(db: Session, question: schemas.QuestionContent):
     db_question = db.query(models.QuestionModel).filter(models.QuestionModel.id == question.id).first()
-    if not db_question:
-        return None
     db_question.description = question.description
     db_question.question = question.question
     db_question.answer = question.answer
