@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useQuestionData } from "../hooks/RandomQuestionHook";
-import EquationComponent  from "../components/mathFormularFormater";
+import EquationComponent  from "../components/MathFormularFormater";
 import NavigationBar from "../components/NavigationBar";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import InputGroup from "react-bootstrap/InputGroup";
