@@ -12,6 +12,7 @@ import Alert from "react-bootstrap/Alert";
 import MathButtons from "../components/MathButtons";
 import useAnswerSubmit from "../hooks/userAnswerSubmit";
 import Countdown from "../components/CountDown";
+import Footer from "../components/Footer";
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
@@ -55,6 +56,7 @@ const QuestionPage = () => {
           <MathButtons answer={answer} setAnswer={setAnswer}/>
 
         </Container>
+        <Footer/>
         </>
     )   
 }
