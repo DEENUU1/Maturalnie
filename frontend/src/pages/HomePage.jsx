@@ -11,33 +11,19 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { BsFillSendCheckFill } from "react-icons/bs";
 import Alert from "react-bootstrap/Alert";
 import MathButtons from "../components/MathButtons";
+import useAnswerSubmit from "../hooks/userAnswerSubmit";
+
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
     const [answer, setAnswer] = useState('');
-    const [response, setResponse] = useState(null);
-    const [showAlert, setShowAlert] = useState(false);
+    const { response, showAlert, submitAnswer } = useAnswerSubmit();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      submitAnswer(answer);
+    };
     
-        try {
-          const response = await fetch('http://127.0.0.1:8000/answer/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({answer}),
-          });
-    
-          const data = await response.json();
-          setResponse(data.success || data.error);
-          setShowAlert(true);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-    
-
-
     return (
         <>
         <NavigationBar/>
