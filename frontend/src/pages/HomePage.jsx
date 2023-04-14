@@ -11,7 +11,8 @@ import { BsFillSendCheckFill } from "react-icons/bs";
 import Alert from "react-bootstrap/Alert";
 import MathButtons from "../components/MathButtons";
 import useAnswerSubmit from "../hooks/userAnswerSubmit";
-
+import Countdown from "../components/CountDown";
+import Footer from "../components/Footer";
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
@@ -26,14 +27,19 @@ const QuestionPage = () => {
     return (
         <>
         <NavigationBar/>
+        
         {showAlert && (
           <Alert variant={response === "Correct answer" ? "success" : "danger"} dismissible="true">
             <Alert.Heading className="text-center">{response}</Alert.Heading>
           </Alert>
         )}
 
-        <Container className="w-60 px-3 mx-auto border border-dark" style={{ maxWidth: "500px", backgroundColor: "white", marginTop: "75px"}}>
+        <div className="mb-5 mt-5 text-center">
+          <h2>Następne pytanie za <Countdown/></h2>
+        </div>
 
+        <Container className="w-60 px-3 mx-auto border border-dark" style={{ maxWidth: "500px", backgroundColor: "white", marginTop: "75px"}}>
+        
           <Card className="mb-5 mt-5 text-center" border="dark" >
             <Card.Header>{questionData.description}</Card.Header>
             <Card.Body><EquationComponent equation={questionData.question} /></Card.Body>
@@ -50,6 +56,7 @@ const QuestionPage = () => {
           <MathButtons answer={answer} setAnswer={setAnswer}/>
 
         </Container>
+        <Footer/>
         </>
     )   
 }
