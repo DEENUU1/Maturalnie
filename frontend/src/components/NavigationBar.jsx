@@ -6,10 +6,9 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 function NavigationBar() {
   return (
     <>  
-    
-        <Navbar key="false" variant="dark" bg="dark" expand="false" >
+         <Navbar key="false" variant="light" bg="light" expand="false" >
           <Container fluid>
-            <Navbar.Brand  href="/">MATuralnie</Navbar.Brand>
+            <Navbar.Brand style={{fontWeight: "700" }} className="mx-auto" href="/">MATURALNIE</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-false`} />
 
             <Navbar.Offcanvas
@@ -18,7 +17,7 @@ function NavigationBar() {
               placement="end">
 
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-false`}>MATuralnie</Offcanvas.Title>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-false`}>MATURALNIE</Offcanvas.Title>
               </Offcanvas.Header>
 
               <Offcanvas.Body>
