@@ -5,7 +5,7 @@ import axios from 'axios';
 export const useQuestionData = () => {
     const [question, setQuestion] = useState({});
     useEffect(() => {
-      axios.get('http://127.0.0.1:8000/question/', {
+      axios.get('http://localhost:80/question/', {
         headers: {
           token: `${process.env.REACT_APP_TOKEN}`
         }

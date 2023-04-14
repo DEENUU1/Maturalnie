@@ -5,9 +5,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
-import auth
-import database
-import schemas
+from . import auth
+from . import database
+from . import schemas
 
 app = FastAPI()
 

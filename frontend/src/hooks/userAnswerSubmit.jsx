@@ -6,7 +6,7 @@ const useAnswerSubmit = () => {
 
   const submitAnswer = async (answer) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/answer/', {
+      const response = await fetch('http://localhost:80/answer/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({answer}),

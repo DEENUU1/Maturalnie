@@ -4,8 +4,8 @@ import hashlib
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 
-import models
-import schemas
+from . import models
+from . import schemas
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 engine = create_engine(
