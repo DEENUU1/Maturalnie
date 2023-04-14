@@ -1,9 +1,11 @@
+import datetime
+import hashlib
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 
-# from backend import models, schemas
-import models, schemas, random_object
-# from backend.random_object import return_random_id
+import models
+import schemas
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 engine = create_engine(
@@ -75,11 +77,28 @@ def get_question_count() -> int:
     return question_count
 
 
+def get_current_date_hash() -> bytes:
+    """
+    Returns the SHA256 hash of the current date as a bytes object.
+    """
+    current_date = datetime.date.today().isoformat()
+    return hashlib.sha256(current_date.encode('utf-8')).digest()
+
+
+def return_random_id() -> int:
+    """
+    Returns a random ID based on the current date hash and the number of questions in the database.
+    """
+    date_hash = get_current_date_hash()
+    count = get_question_count()
+    return int.from_bytes(date_hash, byteorder="big") % count
+
+
 def get_random_question(db: Session):
     """ 
     Returns a random question from the database.
     """
-    question_id = random_object.return_random_id()
+    question_id = return_random_id()
     return db.query(models.QuestionModel).filter(models.QuestionModel.id == question_id).first()
 
 

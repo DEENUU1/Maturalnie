@@ -1,10 +1,13 @@
-from fastapi import FastAPI, Depends, HTTPException, Form, Response
-from sqlalchemy.orm import Session
 from typing import List, Annotated
+
+from fastapi import FastAPI, Depends, HTTPException, Form, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-# from backend import schemas, database, auth
-import schemas, database, auth
+from sqlalchemy.orm import Session
+
+import auth
+import database
+import schemas
 
 app = FastAPI()
 
