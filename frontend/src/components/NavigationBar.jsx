@@ -7,7 +7,7 @@ function NavigationBar() {
   return (
     <>  
     
-        <Navbar key="false" variant="dark" bg="dark" expand="false">
+        <Navbar key="false" variant="dark" bg="dark" expand="false" >
           <Container fluid>
             <Navbar.Brand  href="/">MATuralnie</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-false`} />

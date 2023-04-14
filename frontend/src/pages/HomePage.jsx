@@ -15,7 +15,7 @@ import useAnswerSubmit from "../hooks/userAnswerSubmit";
 
 const QuestionPage = () => {
     const questionData = useQuestionData();
-    const [answer, setAnswer] = useState('');
+    const [answer, setAnswer] = useState(null);
     const { response, showAlert, submitAnswer } = useAnswerSubmit();
 
     const handleSubmit = (event) => {
