@@ -27,7 +27,7 @@ const QuestionPage = () => {
     return (
         <>
         <NavigationBar/>
-        
+
         {showAlert && (
           <Alert variant={response === "Correct answer" ? "success" : "danger"} dismissible="true">
             <Alert.Heading className="text-center">{response}</Alert.Heading>
