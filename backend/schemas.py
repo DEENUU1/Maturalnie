@@ -5,7 +5,8 @@ class QuestionBase(BaseModel):
     question: str
     description: str
     answer: str
-    
+    id: int
+
 
 class QuestionContent(QuestionBase):
     class Config:
@@ -14,6 +15,7 @@ class QuestionContent(QuestionBase):
 
 class QuestionDelete(BaseModel):
     id: int
+
     class Config:
         orm_mode = True
 
