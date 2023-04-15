@@ -1,10 +1,13 @@
-from fastapi import FastAPI, Depends, HTTPException, Form, Response
-from sqlalchemy.orm import Session
 from typing import List, Annotated
+
+from fastapi import FastAPI, Depends, HTTPException, Form, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-# from backend import schemas, database, auth
-import schemas, database, auth
+from sqlalchemy.orm import Session
+
+from . import auth
+from . import database
+from . import schemas
 
 app = FastAPI()
 
@@ -27,7 +30,7 @@ def create_question(
         question: schemas.QuestionContent,
         db: Session = Depends(database.get_db),
         token: str = Depends(auth.verify_token)
-    ):
+):
     """ 
     Create a new question.
 
@@ -48,10 +51,10 @@ def create_question(
 
 @app.delete("/questions/{id}", response_model=schemas.QuestionDelete)
 def delete_question(
-        question: schemas.QuestionDelete, 
-        db: Session = Depends(database.get_db), 
+        question: schemas.QuestionDelete,
+        db: Session = Depends(database.get_db),
         token: str = Depends(auth.verify_token)
-    ):
+):
     """ 
     Delete a question.
 
@@ -73,9 +76,9 @@ def delete_question(
 @app.put('/questions/{id}', response_model=schemas.QuestionContent)
 def update_question(
         question: schemas.QuestionContent,
-        db: Session = Depends(database.get_db), 
+        db: Session = Depends(database.get_db),
         token: str = Depends(auth.verify_token)
-    ):
+):
     """ 
     Update a question.
 
@@ -96,11 +99,11 @@ def update_question(
 
 @app.get("/questions/", response_model=List[schemas.QuestionInfo], response_model_exclude_unset=True)
 def get_question_list(
-        skip: int = 0, 
-        limit: int = 100, 
-        db: Session = Depends(database.get_db), 
+        skip: int = 0,
+        limit: int = 100,
+        db: Session = Depends(database.get_db),
         token: str = Depends(auth.verify_token)
-    ):
+):
     """ 
     Get a list of questions.
 
@@ -122,9 +125,9 @@ def get_question_list(
 
 @app.get('/question/', response_model=schemas.QuestionContent)
 def get_random_question(
-        db: Session = Depends(database.get_db), 
+        db: Session = Depends(database.get_db),
         token: str = Depends(auth.verify_token)
-    ):
+):
     """ 
     Return a random question from the database.
 
@@ -144,9 +147,9 @@ def get_random_question(
 
 @app.post('/answer/')
 def post_user_answer(
-        answer: Annotated[str, Form()], 
+        answer: Annotated[str, Form()],
         db: Session = Depends(database.get_db)
-    ) -> Response:
+) -> Response:
     """ 
     Check if the user's answer is correct.
 
@@ -165,5 +168,3 @@ def post_user_answer(
             return JSONResponse(content={"success": "Correct answer"})
         return JSONResponse(content={"error": "Not correct answer"})
     raise HTTPException(400, "Invalid data")
-
-

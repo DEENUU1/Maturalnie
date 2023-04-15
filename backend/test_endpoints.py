@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 from dotenv import load_dotenv
 import os
 
-from backend import main
+import main
 
 load_dotenv()
 
